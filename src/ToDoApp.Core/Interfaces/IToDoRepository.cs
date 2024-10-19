@@ -5,11 +5,11 @@ namespace ToDoApp.Core.Interfaces;
 public interface IToDoRepository
 {
     Task<ICollection<ToDo>> GetAllAsync();
-    Task<ToDo> GetAsync(Guid id);
-    Task<ToDo> GetIncoming();
+    Task<ToDo?> GetAsync(Guid id);
+    Task<ICollection<ToDo>> GetIncomingAsync();
     Task<ToDo> CreateAsync(ToDo entity);
-    Task<ToDo> UpdateAsync(Guid id);
-    Task SetPercentComplete(double percent);
-    Task Delete(Guid id);
-    Task MarkDone(Guid id);
+    Task<ToDo> UpdateAsync(ToDo entity);
+    Task SetPercentCompleteAsync(Guid id, double percent);
+    Task DeleteAsync(Guid id);
+    Task MarkDoneAsync(Guid id);
 }
