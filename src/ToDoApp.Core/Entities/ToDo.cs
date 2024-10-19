@@ -9,4 +9,6 @@ public class ToDo
     public string? Description { get; set; }
     public double Complete { get; set; }
     public Priority Priority { get; set; }
+    
+    public DateTime ExpirationDateTime { get; set; }
 }
