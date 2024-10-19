@@ -2,6 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Api", "ToDoApp.Api\ToDoApp.Api.csproj", "{E5CF1B8D-34CE-4349-9711-3EB9F914B20E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8C45A590-52C3-41A4-9C98-58F2BCD294ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{644E7329-A67C-4A40-A060-CEE197E2A74B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Infrastructure", "ToDoApp.Infrastructure\ToDoApp.Infrastructure.csproj", "{2C14E210-1EE2-4449-8529-FBE098754A7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Core", "ToDoApp.Core\ToDoApp.Core.csproj", "{4F7F2C2B-5A7F-4434-8969-45564FBEECE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +20,18 @@ Global
 		{E5CF1B8D-34CE-4349-9711-3EB9F914B20E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5CF1B8D-34CE-4349-9711-3EB9F914B20E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5CF1B8D-34CE-4349-9711-3EB9F914B20E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C14E210-1EE2-4449-8529-FBE098754A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C14E210-1EE2-4449-8529-FBE098754A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C14E210-1EE2-4449-8529-FBE098754A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C14E210-1EE2-4449-8529-FBE098754A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F7F2C2B-5A7F-4434-8969-45564FBEECE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F7F2C2B-5A7F-4434-8969-45564FBEECE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F7F2C2B-5A7F-4434-8969-45564FBEECE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F7F2C2B-5A7F-4434-8969-45564FBEECE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5CF1B8D-34CE-4349-9711-3EB9F914B20E} = {8C45A590-52C3-41A4-9C98-58F2BCD294ED}
+		{2C14E210-1EE2-4449-8529-FBE098754A7E} = {8C45A590-52C3-41A4-9C98-58F2BCD294ED}
+		{4F7F2C2B-5A7F-4434-8969-45564FBEECE7} = {8C45A590-52C3-41A4-9C98-58F2BCD294ED}
 	EndGlobalSection
 EndGlobal
