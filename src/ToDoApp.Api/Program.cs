@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using ToDoApp.Api.Mappings;
 using ToDoApp.Infrastructure;
 using ToDoApp.Infrastructure.Persistence;
 
@@ -18,6 +19,8 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
+
+builder.Services.AddAutoMapper(typeof(ToDoProfile));
 
 // Register services
 builder.Services.AddInfrastructure(builder.Configuration);

@@ -28,5 +28,9 @@ public class ToDoConfiguration : IEntityTypeConfiguration<ToDo>
 
         builder.Property(t => t.Priority)
             .IsRequired();
+
+        builder.Property(t => t.ExpirationDateTime)
+            .HasColumnType("timestamp with time zone")
+            .IsRequired();
     }
 }

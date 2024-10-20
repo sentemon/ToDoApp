@@ -19,7 +19,7 @@ public class ToDoRepository : IToDoRepository
         return await _context.ToDos.ToListAsync();
     }
 
-    public async Task<ToDo?> GetAsync(Guid id)
+    public async Task<ToDo?> GetByIdAsync(Guid id)
     {
         return await _context.ToDos.FirstOrDefaultAsync(t => t.Id == id);
     }
@@ -27,7 +27,7 @@ public class ToDoRepository : IToDoRepository
     public async Task<ICollection<ToDo>> GetIncomingAsync()
     {
         return await _context.ToDos
-            .Where(t => t.ExpirationDateTime >= DateTime.Now && t.ExpirationDateTime <= DateTime.Now.AddDays(7))
+            .Where(t => t.ExpirationDateTime >= DateTime.UtcNow && t.ExpirationDateTime <= DateTime.UtcNow.AddDays(7))
             .ToListAsync();
     }
 
@@ -39,17 +39,15 @@ public class ToDoRepository : IToDoRepository
         return entity;
     }
 
-    public async Task<ToDo> UpdateAsync(ToDo entity)
+    public async Task UpdateAsync(ToDo entity)
     {
         _context.ToDos.Update(entity);
         await _context.SaveChangesAsync();
-        
-        return entity;
     }
 
     public async Task SetPercentCompleteAsync(Guid id, double percent)
     {
-        var todo = await GetAsync(id);
+        var todo = await GetByIdAsync(id);
         
         if (todo != null)
         {
@@ -60,7 +58,7 @@ public class ToDoRepository : IToDoRepository
 
     public async Task DeleteAsync(Guid id)
     {
-        var todo = await GetAsync(id);
+        var todo = await GetByIdAsync(id);
         
         if (todo != null)
         {
@@ -69,9 +67,9 @@ public class ToDoRepository : IToDoRepository
         }
     }
 
-    public async Task MarkDoneAsync(Guid id)
+    public async Task MarkAsDoneAsync(Guid id)
     {
-        var todo = await GetAsync(id);
+        var todo = await GetByIdAsync(id);
         
         if (todo != null)
         {
