@@ -10,9 +10,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Core", "src\ToDoApp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{644E7329-A67C-4A40-A060-CEE197E2A74B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Api.Tests", "ToDoApp.Api.Tests\ToDoApp.Api.Tests.csproj", "{96061F13-4E98-46C8-AAAC-7F348B4ED29E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Api.Tests", "tests\ToDoApp.Api.Tests\ToDoApp.Api.Tests.csproj", "{96061F13-4E98-46C8-AAAC-7F348B4ED29E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Infrastructure.Tests", "ToDoApp.Infrastructure.Tests\ToDoApp.Infrastructure.Tests.csproj", "{AA89451A-D522-4C97-A995-54CBC4655E40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Infrastructure.Tests", "tests\ToDoApp.Infrastructure.Tests\ToDoApp.Infrastructure.Tests.csproj", "{AA89451A-D522-4C97-A995-54CBC4655E40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
