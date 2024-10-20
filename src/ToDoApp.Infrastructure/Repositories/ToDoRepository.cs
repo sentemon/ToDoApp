@@ -16,7 +16,9 @@ public class ToDoRepository : IToDoRepository
 
     public async Task<ICollection<ToDo>> GetAllAsync()
     {
-        return await _context.ToDos.ToListAsync();
+        return await _context.ToDos
+            .OrderBy(t => t.Title)
+            .ToListAsync();
     }
 
     public async Task<ToDo?> GetByIdAsync(Guid id)
@@ -28,6 +30,7 @@ public class ToDoRepository : IToDoRepository
     {
         return await _context.ToDos
             .Where(t => t.ExpirationDateTime >= DateTime.UtcNow && t.ExpirationDateTime <= DateTime.UtcNow.AddDays(7))
+            .OrderBy(t => t.ExpirationDateTime)
             .ToListAsync();
     }
 
