@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ToDoApp.Api.DTOs;
 using ToDoApp.Core.Entities;
@@ -10,12 +9,10 @@ namespace ToDoApp.Api.Controllers;
 [Route("api/[controller]")]
 public class ToDoController : ControllerBase
 {
-    private readonly IMapper _mapper;
     private readonly IToDoRepository _toDoRepository;
 
-    public ToDoController(IMapper mapper, IToDoRepository toDoRepository)
+    public ToDoController(IToDoRepository toDoRepository)
     {
-        _mapper = mapper;
         _toDoRepository = toDoRepository;
     }
 
@@ -24,7 +21,7 @@ public class ToDoController : ControllerBase
     {
         var toDoItems = await _toDoRepository.GetAllAsync();
 
-        return Ok(_mapper.Map<ICollection<ToDoDto>>(toDoItems));
+        return Ok(toDoItems);
     }
 
     [HttpGet("get/{id:guid}")]
@@ -37,7 +34,7 @@ public class ToDoController : ControllerBase
             return NotFound();
         }
 
-        return Ok(_mapper.Map<ToDoDto>(toDoItem));
+        return Ok(toDoItem);
     }
 
     [HttpGet("getincoming")]
@@ -45,7 +42,7 @@ public class ToDoController : ControllerBase
     {
         var incomingToDos = await _toDoRepository.GetIncomingAsync();
 
-        return Ok(_mapper.Map<ICollection<ToDoDto>>(incomingToDos));
+        return Ok(incomingToDos);
     }
 
     [HttpPost("create")]
@@ -56,22 +53,30 @@ public class ToDoController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var newToDoItem = _mapper.Map<ToDo>(createToDoDto);
+        var newToDoItem = new ToDo
+        {
+            Id = Guid.NewGuid(),
+            Title = createToDoDto.Title,
+            Description = createToDoDto.Description,
+            Complete = 0,
+            Priority = createToDoDto.Priority,
+            ExpirationDateTime = createToDoDto.ExpirationDateTime
+        };
+        
         var createdToDo = await _toDoRepository.CreateAsync(newToDoItem);
 
-        return CreatedAtAction(nameof(Get), new { id = createdToDo.Id }, _mapper.Map<ToDoDto>(createdToDo));
+        return CreatedAtAction(nameof(Get), new { id = createdToDo.Id }, createdToDo);
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> Update([FromBody] ToDoDto toDoDto)
+    public async Task<IActionResult> Update([FromBody] ToDo toDo)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var updatedToDoItem = _mapper.Map<ToDo>(toDoDto);
-        await _toDoRepository.UpdateAsync(updatedToDoItem);
+        await _toDoRepository.UpdateAsync(toDo);
 
         return NoContent();
     }
