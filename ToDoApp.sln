@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8C45A590-52C3-41A4-9C98-58F2BCD294ED}"
+	ProjectSection(SolutionItems) = preProject
+		src\Dockerfile = src\Dockerfile
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Api", "src\ToDoApp.Api\ToDoApp.Api.csproj", "{E5CF1B8D-34CE-4349-9711-3EB9F914B20E}"
 EndProject
@@ -11,6 +14,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{644E7329-A67C-4A40-A060-CEE197E2A74B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Api.Tests", "tests\ToDoApp.Api.Tests\ToDoApp.Api.Tests.csproj", "{96061F13-4E98-46C8-AAAC-7F348B4ED29E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{5725B2B1-B8AC-4856-8608-01D8193E56BE}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

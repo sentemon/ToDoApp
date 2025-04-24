@@ -5,16 +5,15 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ["ToDoApp.sln", "./"]
-COPY ["src/ToDoApp.Api/ToDoApp.Api.csproj", "src/ToDoApp.Api/"]
-COPY ["src/ToDoApp.Core/ToDoApp.Core.csproj", "src/ToDoApp.Core/"]
-COPY ["src/ToDoApp.Infrastructure/ToDoApp.Infrastructure.csproj", "src/ToDoApp.Infrastructure/"]
+COPY ToDoApp.Api/ToDoApp.Api.csproj ToDoApp.Api/
+COPY ToDoApp.Core/ToDoApp.Core.csproj ToDoApp.Core/
+COPY ToDoApp.Infrastructure/ToDoApp.Infrastructure.csproj ToDoApp.Infrastructure/
 
-RUN dotnet restore "src/ToDoApp.Api/ToDoApp.Api.csproj"
+RUN dotnet restore ToDoApp.Api/ToDoApp.Api.csproj
 
 COPY . .
 
-WORKDIR "/src/src/ToDoApp.Api"
+WORKDIR /src/ToDoApp.Api
 RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish

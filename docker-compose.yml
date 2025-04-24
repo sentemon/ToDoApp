@@ -20,7 +20,7 @@ services:
   backend:
     container_name: todoapp-backend
     build:
-      context: .
+      context: ./src
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
