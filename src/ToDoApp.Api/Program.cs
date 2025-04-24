@@ -5,8 +5,11 @@ using ToDoApp.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.WebHost.UseUrls(builder.Configuration["WebHostUrl"] ?? throw new InvalidOperationException());
+
+builder.Services
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
