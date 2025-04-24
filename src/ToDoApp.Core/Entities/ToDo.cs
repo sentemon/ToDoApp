@@ -4,11 +4,30 @@ namespace ToDoApp.Core.Entities;
 
 public class ToDo
 {
-    public Guid Id { get; init; }
-    public string Title { get; set; } = string.Empty;
-    public string? Description { get; set; }
-    public double Complete { get; set; }
-    public Priority Priority { get; set; }
+    public Guid Id { get; private set; }
+    public string Title { get; private set; }
+    public string Description { get; private set; }
+    public double Complete { get; private set; }
+    public Priority Priority { get; private set; }
     
-    public DateTime ExpirationDateTime { get; set; }
+    public DateTime ExpirationDateTime { get; private set; }
+
+    private ToDo(string title, string description, Priority priority, DateTime expirationDateTime)
+    {
+        Id = Guid.NewGuid();
+        Title = title;
+        Description = description;
+        Priority = priority;
+        ExpirationDateTime = expirationDateTime;
+    }
+
+    public static ToDo CreateInstance(string title, string description, Priority priority, DateTime expirationDateTime)
+    {
+        return new ToDo(title, description, priority, expirationDateTime);
+    }
+
+    public void SetPercentComplete(double percent)
+    {
+        Complete = percent;
+    }
 }

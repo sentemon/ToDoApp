@@ -54,7 +54,7 @@ public class ToDoRepository : IToDoRepository
         
         if (todo != null)
         {
-            todo.Complete = percent;
+            todo.SetPercentComplete(percent);
             await _context.SaveChangesAsync();
         }
     }
@@ -76,7 +76,7 @@ public class ToDoRepository : IToDoRepository
         
         if (todo != null)
         {
-            todo.Complete = 100;
+            todo.SetPercentComplete(100);
             await _context.SaveChangesAsync();
         }
     }

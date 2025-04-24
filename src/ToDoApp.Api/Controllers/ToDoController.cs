@@ -53,16 +53,8 @@ public class ToDoController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var newToDoItem = new ToDo
-        {
-            Id = Guid.NewGuid(),
-            Title = createToDoDto.Title,
-            Description = createToDoDto.Description,
-            Complete = 0,
-            Priority = createToDoDto.Priority,
-            ExpirationDateTime = createToDoDto.ExpirationDateTime
-        };
-        
+        var newToDoItem = ToDo.CreateInstance(createToDoDto.Title, createToDoDto.Description, createToDoDto.Priority, createToDoDto.ExpirationDateTime);
+
         var createdToDo = await _toDoRepository.CreateAsync(newToDoItem);
 
         return CreatedAtAction(nameof(Get), new { id = createdToDo.Id }, createdToDo);
