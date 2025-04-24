@@ -25,6 +25,15 @@ public class ToDo
     {
         return new ToDo(title, description, priority, expirationDateTime);
     }
+    
+    public void Update(string? title, string? description, double? complete, Priority? priority, DateTime? expirationDateTime)
+    {
+        Title = title ?? Title;
+        Description = description ?? Description;
+        Complete = complete ?? Complete;
+        Priority = priority ?? Priority;
+        ExpirationDateTime = expirationDateTime ?? ExpirationDateTime;
+    }
 
     public void SetPercentComplete(double percent)
     {

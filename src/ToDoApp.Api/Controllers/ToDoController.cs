@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDoApp.Api.DTOs;
-using ToDoApp.Core.Entities;
+using ToDoApp.Core.Enums;
 using ToDoApp.Core.Interfaces;
 
 namespace ToDoApp.Api.Controllers;
@@ -19,22 +19,21 @@ public class ToDoController : ControllerBase
     [HttpGet("getall")]
     public async Task<IActionResult> GetAll()
     {
-        var toDoItems = await _toDoRepository.GetAllAsync();
+        var toDos = await _toDoRepository.GetAllAsync();
 
-        return Ok(toDoItems);
+        return Ok(toDos);
     }
 
     [HttpGet("get/{id:guid}")]
     public async Task<IActionResult> Get(Guid id)
     {
-        var toDoItem = await _toDoRepository.GetByIdAsync(id);
-
-        if (toDoItem == null)
+        var toDo = await _toDoRepository.GetByIdAsync(id);
+        if (toDo is null)
         {
             return NotFound();
         }
 
-        return Ok(toDoItem);
+        return Ok(toDo);
     }
 
     [HttpGet("getincoming")]
@@ -53,22 +52,21 @@ public class ToDoController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var newToDoItem = ToDo.CreateInstance(createToDoDto.Title, createToDoDto.Description, createToDoDto.Priority, createToDoDto.ExpirationDateTime);
+        var toDo = await _toDoRepository.CreateAsync(createToDoDto.Title, createToDoDto.Description, createToDoDto.Priority, createToDoDto.ExpirationDateTime);
 
-        var createdToDo = await _toDoRepository.CreateAsync(newToDoItem);
-
-        return CreatedAtAction(nameof(Get), new { id = createdToDo.Id }, createdToDo);
+        return CreatedAtAction(nameof(Get), new { id = toDo.Id }, toDo);
     }
 
     [HttpPut("update")]
-    public async Task<IActionResult> Update([FromBody] ToDo toDo)
+    public async Task<IActionResult> Update(Guid id, string? title, string? description, double? complete, Priority? priority, DateTime? expirationDateTime)
     {
-        if (!ModelState.IsValid)
+        var toDo = await _toDoRepository.GetByIdAsync(id);
+        if (toDo == null)
         {
-            return BadRequest(ModelState);
+            return NotFound();
         }
 
-        await _toDoRepository.UpdateAsync(toDo);
+        await _toDoRepository.UpdateAsync(id, title, description, complete, priority, expirationDateTime);
 
         return NoContent();
     }
@@ -76,9 +74,8 @@ public class ToDoController : ControllerBase
     [HttpPut("setpercentcomplete/{id:guid}")]
     public async Task<IActionResult> SetPercentComplete(Guid id, double percentComplete)
     {
-        var toDoItem = await _toDoRepository.GetByIdAsync(id);
-
-        if (toDoItem == null)
+        var toDo = await _toDoRepository.GetByIdAsync(id);
+        if (toDo == null)
         {
             return NotFound();
         }
@@ -91,9 +88,8 @@ public class ToDoController : ControllerBase
     [HttpDelete("delete/{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var toDoItem = await _toDoRepository.GetByIdAsync(id);
-
-        if (toDoItem == null)
+        var toDo = await _toDoRepository.GetByIdAsync(id);
+        if (toDo is null)
         {
             return NotFound();
         }
@@ -106,9 +102,8 @@ public class ToDoController : ControllerBase
     [HttpPut("markdone/{id:guid}")]
     public async Task<IActionResult> MarkAsDone(Guid id)
     {
-        var toDoItem = await _toDoRepository.GetByIdAsync(id);
-
-        if (toDoItem == null)
+        var toDo = await _toDoRepository.GetByIdAsync(id);
+        if (toDo is null)
         {
             return NotFound();
         }

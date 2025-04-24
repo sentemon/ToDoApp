@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.Core.Entities;
+using ToDoApp.Core.Enums;
 using ToDoApp.Core.Interfaces;
 using ToDoApp.Infrastructure.Persistence;
 
@@ -34,17 +35,25 @@ public class ToDoRepository : IToDoRepository
             .ToListAsync();
     }
 
-    public async Task<ToDo> CreateAsync(ToDo entity)
+    public async Task<ToDo> CreateAsync(string title, string description, Priority priority,
+        DateTime expirationDateTime)
     {
-        await _context.ToDos.AddAsync(entity);
+        var toDo = ToDo.CreateInstance(title, description, priority, expirationDateTime);
+        _context.ToDos.Add(toDo);
+
         await _context.SaveChangesAsync();
-        
-        return entity;
+        return toDo;
     }
 
-    public async Task UpdateAsync(ToDo entity)
+    public async Task UpdateAsync(Guid id, string? title, string? description, double? complete, Priority? priority, DateTime? expirationDateTime)
     {
-        _context.ToDos.Update(entity);
+        var todo = await GetByIdAsync(id);
+        if (todo is null)
+        {
+            return;
+        }
+
+        todo.Update(title, description, complete, priority, expirationDateTime);
         await _context.SaveChangesAsync();
     }
 
