@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ToDoApp.Core.Enums;
 
 namespace ToDoApp.Core.Entities;
@@ -12,19 +13,15 @@ public class ToDo
     
     public DateTime ExpirationDateTime { get; private set; }
 
-    private ToDo(string title, string description, Priority priority, DateTime expirationDateTime)
+    public ToDo(string title, string description, Priority priority, DateTime expirationDateTime)
     {
-        Id = Guid.NewGuid();
         Title = title;
         Description = description;
         Priority = priority;
         ExpirationDateTime = expirationDateTime;
     }
-
-    public static ToDo CreateInstance(string title, string description, Priority priority, DateTime expirationDateTime)
-    {
-        return new ToDo(title, description, priority, expirationDateTime);
-    }
+    
+    public ToDo() { }
     
     public void Update(string? title, string? description, double? complete, Priority? priority, DateTime? expirationDateTime)
     {

@@ -54,7 +54,7 @@ public class ToDoController : ControllerBase
 
         var toDo = await _toDoRepository.CreateAsync(createToDoDto.Title, createToDoDto.Description, createToDoDto.Priority, createToDoDto.ExpirationDateTime);
 
-        return CreatedAtAction(nameof(Get), new { id = toDo.Id }, toDo);
+        return Ok(toDo);
     }
 
     [HttpPut("update")]

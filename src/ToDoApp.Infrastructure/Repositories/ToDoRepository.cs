@@ -38,7 +38,7 @@ public class ToDoRepository : IToDoRepository
     public async Task<ToDo> CreateAsync(string title, string description, Priority priority,
         DateTime expirationDateTime)
     {
-        var toDo = ToDo.CreateInstance(title, description, priority, expirationDateTime);
+        var toDo = new ToDo(title, description, priority, expirationDateTime);
         _context.ToDos.Add(toDo);
 
         await _context.SaveChangesAsync();
