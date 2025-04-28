@@ -21,7 +21,15 @@ public class ToDo
         ExpirationDateTime = expirationDateTime;
     }
     
-    public ToDo() { }
+    [JsonConstructor]
+    private ToDo(Guid id, string title, string description, Priority priority, DateTime expirationDateTime)
+    {
+        Id = id;
+        Title = title;
+        Description = description;
+        Priority = priority;
+        ExpirationDateTime = expirationDateTime;
+    }
     
     public void Update(string? title, string? description, double? complete, Priority? priority, DateTime? expirationDateTime)
     {

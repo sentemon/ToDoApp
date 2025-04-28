@@ -12,14 +12,13 @@ using Xunit;
 
 namespace ToDoApp.Api.Tests.Controllers;
 
-public class ToDoControllerIntegrationTests(WebApplicationFactory<ToDoController> factory)
-    : IClassFixture<WebApplicationFactory<ToDoController>>
+public class ToDoControllerIntegrationTests(WebApplicationFactory<ToDoController> factory) : IClassFixture<WebApplicationFactory<ToDoController>>
 {
     private readonly HttpClient _client = factory.CreateClient();
     private readonly JsonSerializerOptions _jsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
-        // Converters = { new JsonStringEnumConverter() }
+        Converters = { new JsonStringEnumConverter() }
     };
 
     [Fact]
