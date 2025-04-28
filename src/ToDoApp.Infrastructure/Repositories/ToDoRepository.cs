@@ -35,8 +35,7 @@ public class ToDoRepository : IToDoRepository
             .ToListAsync();
     }
 
-    public async Task<ToDo> CreateAsync(string title, string description, Priority priority,
-        DateTime expirationDateTime)
+    public async Task<ToDo> CreateAsync(string title, string description, Priority priority, DateTime expirationDateTime)
     {
         var toDo = new ToDo(title, description, priority, expirationDateTime);
         _context.ToDos.Add(toDo);
