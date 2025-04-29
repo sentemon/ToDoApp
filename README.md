@@ -12,19 +12,27 @@ ToDoApp is a simple application developed in C# for managing tasks. This project
 
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Installation
+Here's a more polished and professional version of your installation and usage guide:
 
-1. Clone the repository and navigate to the project directory:
-    ```bash
-    git clone https://github.com/sentemon/ToDoApp.git
-    cd ToDoApp
-    ```
 
-## Usage
+### 1. Clone the Repository
 
-### Running with Docker
+Start by cloning the project and navigating into its directory:
 
-To run the application, use the following command:
+```bash
+git clone https://github.com/sentemon/ToDoApp.git
+cd ToDoApp
+```
+
+### 2. Run the Application with Docker
+
+Build and start the application using Docker Compose:
+
 ```bash
 docker compose up --build
 ```
+
+### 3. Access the Application
+
+Once the app is running, you can access the API documentation via Swagger UI: 
+- **[http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)**
